@@ -121,9 +121,16 @@ INSERT INTO owner (id, id_apartments, name, property_rights) VALUES
 (120, 20, 'Короленко Олег Іванович', 'co-owner');
 
 
+UPDATE owner
+SET property_rights = 'owner';
+
+UPDATE owner
+SET property_rights = 'co-owner'
+WHERE id > 100;
+
+
 ALTER TABLE owner
 ADD COLUMN email VARCHAR(155);
-
 
 UPDATE owner
 SET email = CONCAT(SUBSTRING_INDEX(name, ' ', 1), '_', SUBSTRING_INDEX(SUBSTRING_INDEX(name, ' ', -2), ' ', -1), '_', SUBSTRING_INDEX(name, ' ', -1), '_', id, '@gmail.com')
@@ -136,4 +143,6 @@ ADD COLUMN parking ENUM('Yes', 'No');
 
 UPDATE owner
 SET parking = CASE WHEN RAND() > 0.5 THEN 'Yes' ELSE 'No' END;
+
+
 
