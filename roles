@@ -11,3 +11,8 @@ SELECT
   END AS roles
 FROM owner
 WHERE id <= 120;
+
+
+INSERT INTO roles (id_owner, roles)
+VALUES
+(1,'Member');
