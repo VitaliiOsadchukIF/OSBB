@@ -129,3 +129,11 @@ UPDATE owner
 SET email = CONCAT(SUBSTRING_INDEX(name, ' ', 1), '_', SUBSTRING_INDEX(SUBSTRING_INDEX(name, ' ', -2), ' ', -1), '_', SUBSTRING_INDEX(name, ' ', -1), '_', id, '@gmail.com')
 WHERE id BETWEEN 1 AND 120;
 
+
+ALTER TABLE owner
+ADD COLUMN parking ENUM('Yes', 'No');
+
+
+UPDATE owner
+SET parking = CASE WHEN RAND() > 0.5 THEN 'Yes' ELSE 'No' END;
+
