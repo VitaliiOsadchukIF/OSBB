@@ -1,4 +1,4 @@
-INSERT INTO myosbb.apartments (number, id_buildings, area, number_of_rooms)
+INSERT INTO osbb.apartments (number, id_buildings, area, number_of_rooms)
 VALUES
 (1,1,100.5,3),
 (2,1,85.2,2),
