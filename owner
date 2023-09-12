@@ -119,3 +119,12 @@ INSERT INTO owner (id, id_apartments, name, property_rights) VALUES
 (118, 18, 'Савченко Сергій Володимирович', 'co-owner'),
 (119, 19, 'Поліщук Марія Сергіївна', 'owner'),
 (120, 20, 'Короленко Олег Іванович', 'co-owner');
+
+
+ALTER TABLE owner
+ADD COLUMN email VARCHAR(155);
+
+
+UPDATE owner
+SET email = CONCAT('name', id, '@example.com')
+WHERE id BETWEEN 1 AND 120;
