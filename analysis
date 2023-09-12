@@ -1,0 +1,25 @@
+EXPLAIN SELECT
+    o.name AS owner_name,
+    o.email AS owner_email,
+    b.adress AS building_address,
+    a.number AS apartment_number,
+    a.area AS apartment_area
+FROM
+    osbb.owner o
+JOIN
+    residents r ON o.id_apartments = r.id_apartment
+JOIN
+    osbb.apartments a ON o.id_apartments = a.id
+JOIN
+    osbb.buildings b ON a.id_buildings = b.id
+WHERE
+    o.property_rights = 'owner' -- Фільтр для власників
+    AND o.parking = 'No' -- Фільтр для тих, хто не має права в'їзду
+    AND (
+        o.id IN (SELECT id_owner FROM osbb.roles WHERE roles = 'Member') -- Власники, які є учасниками ОСББ
+         OR a.id NOT IN (SELECT id_apartment FROM osbb.residents) -- Квартири, в яких немає жителів
+    )
+GROUP BY
+    o.id
+HAVING
+    COUNT(a.id) < 2; -- Власники, які мають менше двох квартир у власності
